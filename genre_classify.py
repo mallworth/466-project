@@ -32,8 +32,7 @@ def RF(D, drop_popularity=False):
 
         D_train, D_test, gt_train, gt_test = D[train], D[test], gt[train], gt[test]
 
-        # NOTE: n_jobs = -1 uses all processors
-        rf = RandomForestClassifier(n_estimators=100, n_jobs=-1)
+        rf = RandomForestClassifier(n_estimators=100)
         rf.fit(D_train, gt_train)
         predicted = rf.predict(D_test)
 

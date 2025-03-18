@@ -16,8 +16,7 @@ def regress_hetero(D):
 
     D_train, D_test, gt_train, gt_test = train_test_split(D, gt, test_size=0.2, random_state=42)
 
-    # NOTE: n_jobs = -1 uses all processors
-    regr = RandomForestRegressor(n_estimators=100, n_jobs=-1)
+    regr = RandomForestRegressor(n_estimators=100)
     regr.fit(D_train, gt_train)
 
     predicted = regr.predict(D_test)
@@ -43,8 +42,7 @@ def regress_homo(D, genre=None):
 
     D_train, D_test, gt_train, gt_test = train_test_split(D, gt, test_size=0.2, random_state=42)
 
-    # NOTE: n_jobs = -1 uses all processors
-    regr = RandomForestRegressor(n_estimators=100, n_jobs=-1)
+    regr = RandomForestRegressor(n_estimators=100)
     regr.fit(D_train, gt_train)
 
     predicted = regr.predict(D_test)
