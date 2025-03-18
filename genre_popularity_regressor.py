@@ -53,6 +53,7 @@ MAE: {mean_absolute_error(gt_test, predicted)}''')
 
 if __name__ == '__main__':
     D = pd.read_csv("data/music_genre.csv")
+    D = D.drop(columns=["instance_id"])
     total_mse = 0
     total_mae = 0
     for genre in sorted(['Country','Hip-Hop', 'Jazz', 'Classical', 'Electronic', 'Rap', 'Rock', 'Anime', 'Alternative', 'Blues']):

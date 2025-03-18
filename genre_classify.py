@@ -32,7 +32,7 @@ def RF(D, drop_popularity=False):
 
         D_train, D_test, gt_train, gt_test = D[train], D[test], gt[train], gt[test]
 
-        rf = RandomForestClassifier(n_estimators=100)
+        rf = RandomForestClassifier(n_estimators=100, n_jobs=-1)
         rf.fit(D_train, gt_train)
         predicted = rf.predict(D_test)
 
@@ -59,6 +59,7 @@ def RF(D, drop_popularity=False):
 
 if __name__ == '__main__':
     D = pd.read_csv("data/music_genre.csv")
+    D = D.drop(columns=["instance_id"])
 
     # Uncomment to drop the popularity attribute before running Random Forest
     # RF(D, True)

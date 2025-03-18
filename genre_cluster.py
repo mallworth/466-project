@@ -47,6 +47,7 @@ NOTE: Best hyperparams are default
 '''
 def visualize_clustering(D, e=2, samples=12):
     D = D.select_dtypes(include=['number']).dropna()
+    D = D.drop(columns=["popularity", "instance_id"])
     D = D[(np.abs(stats.zscore(D)) < 3).all(axis=1)]
 
     # Scale data & perform Principal Component Analysis (Decompose into 2 vectors for visualization)
@@ -69,6 +70,7 @@ def visualize_clustering(D, e=2, samples=12):
     plt.figure(figsize=(8, 8))
     plt.scatter(cluster["x"], cluster["y"], marker=".", s=5, c="deepskyblue", label="Cluster points")
     plt.scatter(outliers["x"], outliers["y"], marker="x", s=10, c="darkorange", label="Outliers")
+    plt.legend(loc="lower left")
     plt.xticks([])
     plt.yticks([])
     plt.show()
@@ -82,7 +84,8 @@ def visualize_gt(D):
     D = D.dropna(axis=0)
     gt = D["music_genre"]
     # Drop non-numeric attributes and outliers
-    D = D.select_dtypes(include=['number'])
+    D = D.select_dtypes(include=["number"])
+    D = D.drop(columns=["popularity", "instance_id"])
     D = D[(np.abs(stats.zscore(D)) < 3).all(axis=1)]
     # Match genres to remaining datapoints
     gt = gt.loc[D.index]
@@ -114,7 +117,7 @@ def visualize_gt(D):
     plt.figure(figsize=(8,8))
     plt.scatter(x=df["x"], y=df["y"], marker=".", s=5, c=colors)
     legend = [mpatches.Patch(color=color, label=genre) for genre, color in genre_colors.items()]
-    plt.legend(handles=legend, title="Genres")
+    plt.legend(handles=legend, loc="lower left")
     # Removed axis numbers because scale is not easy to understand...collapsed several dimensions into 2
     plt.xticks([])
     plt.yticks([])
