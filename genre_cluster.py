@@ -126,10 +126,10 @@ def visualize_gt(D):
 if __name__ == '__main__':
     D = pd.read_csv("data/music_genre.csv")
     # Uncomment to test hyperparameters for DBSCAN
-    # dbscan(D)
+    dbscan(D)
 
     # Uncomment to visualize clustering by DBSCAN
-    # visualize_clustering(D)
+    visualize_clustering(D)
 
     # Uncomment to visualize clustering of actual data
-    # visualize_gt(D)
+    visualize_gt(D)
